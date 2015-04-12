@@ -63,18 +63,27 @@ class LoginForm extends Model
 
             if (!$user) {
                 $this->addError($attribute, '用户名或密码错误。');
+                return;
             }
             
             $result = $user->validatePassword();
             
-            if(!empty($result['validateCodeError']))
+            if(!empty($result['validateCodeError']) && $result['validateCodeError'] == true)
             {
                 $this->addError('captcha', '验证码错误。');
+                return;
             }
             
-            if(!empty($result['userNameOrPasswordError']))
+            if(!empty($result['userNameOrPasswordError']) && $result['userNameOrPasswordError'] == true)
             {
                 $this->addError('password', '用户名或密码错误。');
+                return;
+            }
+            
+            if(empty($result['success']) || $result['success'] != true)
+            {
+                $this->addError('password', '用户名或密码错误。');
+                return;
             }
         }
     }

@@ -57,6 +57,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->redirect(['class']);
             return $this->goBack();
         } else {
             return $this->render('login', [
@@ -67,6 +68,9 @@ class SiteController extends Controller
 
     public function actionLogout()
     {
+        Yii::$app->session->remove('jsessionid');
+        
+        
         Yii::$app->user->logout();
 
         return $this->goHome();
@@ -98,7 +102,11 @@ class SiteController extends Controller
     
     public function actionClass()
     {
-        return $this->render('class');
+        $classes = User::getClass();
+        
+        return $this->render('class', [
+            'classese' => $classes,
+        ]);
     }
     
     public function actionCaptcha()
