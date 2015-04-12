@@ -40,6 +40,8 @@ $config = [
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,
+    'timeZone' => 'Asia/Shanghai',
+    'language' => 'zh-CN',
 ];
 
 if (YII_ENV_DEV) {
