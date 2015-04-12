@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 ?>
                 <?= $form->field($model, 'school')->dropDownList($schools) ?>
-                <?= $form->field($model, 'username')->textInput(['maxlength' => 20]) ?>
+                <?= $form->field($model, 'username')->textInput(['maxlength' => 8]) ?>
                 <?= $form->field($model, 'password')->passwordInput(['maxlength' => 35]) ?>
             
                 <label class="control-label" for="loginform-captcha">验证码</label>
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'captcha', ['template' => "{input}\n{hint}\n{error}"])->textInput(['maxlength' => 4]) ?>
                     </div>
                     <div class="col-lg-6" style="padding-top: 5px;">
-                        <img class="img-rounded" src="<?= Yii::$app->params['captchaUrl'] ?>" alt="captchar" title="验证码">
+                        <?= Html::img(['site/captcha'], ['class' => 'img-rounded']) ?>
                     </div>
                 </div>
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>

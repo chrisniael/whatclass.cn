@@ -2,13 +2,14 @@
 
 namespace app\models;
 
+use Yii;
+
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
     public $id;
     public $username;
     public $password;
-    public $authKey;
-    public $accessToken;
+    public $captcha;
 
     private static $users = [
         '100' => [
@@ -32,7 +33,11 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        $user = new User();
+        $user->id = $id;
+        $user->username = $id;
+        
+        return $user;
     }
 
     /**
@@ -40,30 +45,18 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
         return null;
     }
-
-    /**
-     * Finds user by username
-     *
-     * @param  string      $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
+    
+    public static function findByUsername($username, $password, $captcha)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        $user = new User();
+        $user->id = $username;
+        $user->username = $username;
+        $user->password = $password;
+        $user->captcha = $captcha;
+        
+        return $user;
     }
 
     /**
@@ -79,7 +72,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return NULL;
     }
 
     /**
@@ -87,17 +80,64 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return false;
     }
-
-    /**
-     * Validates password
-     *
-     * @param  string  $password password to validate
-     * @return boolean if password provided is valid for current user
-     */
-    public function validatePassword($password)
+    
+    public static function request_with_cookie($url, $cookie_jar, $post_fields = "", $saveOrUse = 0)
     {
-        return $this->password === $password;
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url); 
+	curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6 (.NET CLR 3.5.30729)"); 
+
+	if(!empty($post_fields))
+	{
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
+            curl_setopt($ch, CURLOPT_HEADER, true);     //显示 Header
+	}
+        else
+        {
+            curl_setopt($ch, CURLOPT_HEADER, false);
+        }
+
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+        curl_setopt($ch, $saveOrUse == 0 ? CURLOPT_COOKIEJAR : CURLOPT_COOKIEFILE, $cookie_jar);
+
+	$filecontent = curl_exec($ch);
+	curl_close($ch);
+	return $filecontent; 
+    }
+    
+    public function validatePassword()
+    {
+        $postFields = "j_username=$this->username&j_password=$this->password&validateCode=$this->captcha";
+        
+        $cookie_jar = Yii::$app->session->get('jsessionid');
+        $header = self::request_with_cookie(Yii::$app->params['loginUrl'], $cookie_jar, $postFields, 1);
+        
+        $headerArr = explode("\n", $header);
+        foreach($headerArr as $value)
+        {
+            if(substr($value, 0, strlen('Location:')) == 'Location:')
+            {
+                $redirectUrl = substr($value, strlen('Location:') + 1);
+                break;
+            }
+        }
+        
+        $resultJson = self::request_with_cookie($redirectUrl, $cookie_jar);
+        $result = json_decode($resultJson, true);
+        
+        return $result;
+    }
+    
+    public static function generateCaptcha()
+    {
+        $cookie_jar = tempnam('./cookie','JSESSIONID');
+        Yii::$app->session->set('jsessionid', $cookie_jar);
+        
+        $captcha = self::request_with_cookie(Yii::$app->params['captchaUrl'], $cookie_jar);
+        
+        return $captcha;
     }
 }

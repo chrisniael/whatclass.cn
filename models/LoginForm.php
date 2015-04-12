@@ -28,6 +28,7 @@ class LoginForm extends Model
             ['school', 'required'],
             // username and password are both required
             [['username', 'password'], 'required'],
+            ['username', 'integer'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
@@ -60,8 +61,20 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
 
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            if (!$user) {
+                $this->addError($attribute, '用户名或密码错误。');
+            }
+            
+            $result = $user->validatePassword();
+            
+            if(!empty($result['validateCodeError']))
+            {
+                $this->addError('captcha', '验证码错误。');
+            }
+            
+            if(!empty($result['userNameOrPasswordError']))
+            {
+                $this->addError('password', '用户名或密码错误。');
             }
         }
     }
@@ -73,6 +86,9 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
+//            $user = $this->getUser();
+//            return $user->validatePassword();
+            
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         } else {
             return false;
@@ -87,7 +103,7 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = User::findByUsername($this->username, $this->password, $this->captcha);
         }
 
         return $this->_user;
