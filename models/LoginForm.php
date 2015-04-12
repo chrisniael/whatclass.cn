@@ -10,8 +10,10 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
+    public $school;
     public $username;
     public $password;
+    public $captcha;
     public $rememberMe = true;
 
     private $_user = false;
@@ -23,21 +25,26 @@ class LoginForm extends Model
     public function rules()
     {
         return [
+            ['school', 'required'],
             // username and password are both required
             [['username', 'password'], 'required'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            
+            ['captcha', 'required'],
         ];
     }
     
     public function attributeLabels()
     {
         return [
-            'username' => '用户名',
+            'school' => '学校',
+            'username' => '学号',
             'password' => '密码',
             'rememberMe' => '记住密码',
+            'captcha' => '验证码',
         ];
     }
 
