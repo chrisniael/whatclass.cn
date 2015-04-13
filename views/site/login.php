@@ -37,10 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Html::img(['site/captcha'], ['class' => 'img-rounded']) ?>
                     </div>
                 </div>
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-<!--                <div style="color:#999;margin:1em 0">
-                    如果你忘记密码可以<? Html::a('重置它', ['site/request-password-reset']) ?>.
-                </div>-->
                 <div class="form-group">
                     <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>

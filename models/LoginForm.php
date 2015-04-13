@@ -14,7 +14,7 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $captcha;
-    public $rememberMe = true;
+    public $rememberMe = false;
 
     private $_user = false;
 
@@ -95,9 +95,6 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-//            $user = $this->getUser();
-//            return $user->validatePassword();
-            
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         } else {
             return false;
