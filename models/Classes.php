@@ -25,27 +25,49 @@ class Classes
         
         $result = User::request_with_cookie($redirectUrl, $cookie_jar);
         
-        return self::filterDate($result);
+        self::filterTable($result);
+        
+        self::removePrint($result);
+        
+        self::removeEmptyTh($result);
+        
+        self::removeEmptyTd($result);
+        
+        
+        return $result;
     }
     
-    public static function filterDate($result)
-    {
-//        $captionLabelLeft = "<caption>";
-//        $captionLabelStart = strpos($result, $captionLabelLeft, 0);
-//        
-//        $captionStart = $captionLabelStart + strlen($captionLabelLeft);
-//        $captionEnd = strpos($result, "<", $captionStart);
-//        
-//        $caption = substr($result, $captionStart, $captionEnd - $captionStart);
-        
+    public static function filterTable(&$result)
+    {        
         $tableLabelLeft = "<table";
         $tableLabelRight = "table>";
         $tableLabelStart = strpos($result, $tableLabelLeft, 0);
         
         $tableLabelEnd = strrpos($result, $tableLabelRight, $tableLabelStart + strlen($tableLabelLeft));
         
-        $table = substr($result, $tableLabelStart, $tableLabelEnd + strlen($tableLabelRight) - $tableLabelStart);
+        $result = substr($result, $tableLabelStart, $tableLabelEnd + strlen($tableLabelRight) - $tableLabelStart);
+    }
+    
+    public static function removePrint(&$table)
+    {
+        $spanLabelLeft = "<span";
+        $spanLabelRight = "span>";
         
-        return $table;
+        $spanLabelStart = strpos($table, $spanLabelLeft, 0);
+        $spanLabelEnd = strpos($table, $spanLabelRight, $spanLabelStart + strlen($spanLabelLeft));
+        
+        $table = substr_replace($table, "", $spanLabelStart, $spanLabelEnd + strlen($spanLabelRight) - $spanLabelStart);
+    }
+    
+    public static function removeEmptyTd(&$table)
+    {   
+        $removeHtml = '<td class="firstHiddenTd"></td>';
+        $table = str_replace($removeHtml, "", $table);
+    }
+    
+    public static function removeEmptyTh(&$table)
+    {
+        $removeHtml = '<th class="firstHiddenTd">';
+        $table = str_replace($removeHtml, "", $table);
     }
 }
