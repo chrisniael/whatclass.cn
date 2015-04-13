@@ -107,3 +107,81 @@ a.desc:after {
   color: #fff;
   background-color: #d43f3a;
 }
+
+.CourseFormTable {
+  BORDER-LEFT: #a4d9ff 1px solid;
+  BORDER-RIGHT: #a4d9ff 1px solid;
+  BORDER-TOP: #a4d9ff 1px solid;
+  BORDER-BOTTOM: #a4d9ff 1px solid;
+  border-collapse: collapse;
+  width: 98%;
+  FONT-SIZE: 12px;
+  background: #FAFAFA;
+}
+
+.CourseFormTable caption {
+  border: 1px #98b1c8 solid;
+  font-size: 14px;
+  height: 35px !important;
+  color: black;
+  font-weight: normal;
+  text-align: center;
+}
+
+.CourseFormTable th {
+  border: 1px #98b1c8 solid;
+  font-weight: normal;
+  font-size: 14px;
+  height: 28px;
+  color: black;
+  text-align: center;
+}
+
+.CourseFormTable td {
+  border: 1px #98b1c8 solid;
+  height: 28px !important;
+  width: 128px;
+  text-align: center;
+}
+
+td.firstHiddenTd {
+  height: 38px;
+  height: 38px !important;
+}
+
+.CourseFormTable .firstHiddenTd {
+  border: 1px #98b1c8 solid;
+  font-weight: bold;
+  border-right: #a4d9ff 0px;
+  border-bottom: #a4d9ff 0px;
+  width: 0px !important;
+  width: 1px !important;
+  font-size: 0px;
+}
+
+.NoFitCourse {
+  border-left: #a4d9ff 1px solid;
+  border-right: #a4d9ff 1px solid;
+  border-top: #a4d9ff 1px solid;
+  border-bottom: #a4d9ff 1px solid;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #FAFAFA;
+  width: 100%;
+}
+
+.NoFitCourse caption {
+  border: 1px #98b1c8 solid;
+  font-size: 14px;
+  height: 20px;
+  color: black;
+}
+
+.NoFitCourse th {
+  border: 1px #98b1c8 solid;
+  font-size: 14px;
+  height: 20px;
+  color: black;
+  text-align: center;
+}
+

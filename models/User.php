@@ -154,27 +154,6 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         return $captcha;
     }
     
-    public static function getClass()
-    {
-        $cookie_jar = Yii::$app->session->get('jsessionid');
-        
-        $header = self::request_with_cookie(Yii::$app->params['classUrl'], $cookie_jar, true, "", 1);
-        
-        $headerArr = explode("\n", $header);
-        foreach($headerArr as $value)
-        {
-            if(substr($value, 0, strlen('Location:')) == 'Location:')
-            {
-                $redirectUrl = substr($value, strlen('Location:') + 1);
-                break;
-            }
-        }
-        
-        $result = self::request_with_cookie($redirectUrl, $cookie_jar);
-        
-        return $result;
-    }
-    
     public static function logout()
     {
         

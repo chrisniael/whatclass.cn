@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use app\models\Classes;
 
 class SiteController extends Controller
 {
@@ -102,7 +103,7 @@ class SiteController extends Controller
     
     public function actionClass()
     {
-        $classes = User::getClass();
+        $classes = Classes::getClass();
         
         return $this->render('class', [
             'classese' => $classes,
