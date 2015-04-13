@@ -23,6 +23,11 @@ class Classes
             }
         }
         
+        if(strcmp(trim($redirectUrl), Yii::$app->params['indexUrl']) == 0)
+        {
+            return false;
+        }
+        
         $result = User::request_with_cookie($redirectUrl, $cookie_jar);
         
         self::filterTable($result);

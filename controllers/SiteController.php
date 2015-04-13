@@ -105,6 +105,12 @@ class SiteController extends Controller
     {
         $classes = Classes::getClass();
         
+        if($classes === false)
+        {
+            Yii::$app->getUser()->logout();
+            $this->redirect(['login']);
+        }
+        
         return $this->render('class', [
             'classese' => $classes,
         ]);
