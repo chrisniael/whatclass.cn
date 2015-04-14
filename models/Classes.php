@@ -23,7 +23,7 @@ class Classes
             }
         }
         
-        if(strcmp(trim($redirectUrl), Yii::$app->params['indexUrl']) == 0)
+        if(empty($redirectUrl) || strcmp(trim($redirectUrl), Yii::$app->params['indexUrl']) == 0)
         {
             return false;
         }
