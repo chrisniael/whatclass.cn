@@ -100,50 +100,69 @@ $(document).ready(function() {
         var addressLeft = "<br>", addressRight = "\n";
         
         
-        clasName = parseData(tdHtml, nameLeft, nameRight, 0);
-        if(clasName === false) {
+        nameResult = parseData(tdHtml, nameLeft, nameRight, 0);
+        if(nameResult === false) {
+            return false;
+        }
+        name = trimBlank(nameResult.data);
+        
+        weekBeginResult = parseData(tdHtml, weekBeginLeft, weekBeginRight, nameResult.endPos);
+        if(weekBeginResult === false) {
+            return false;
+        }
+        weekBegin = parseInt(weekBeginResult.data);
+        if(isNaN(weekBegin)) {
             return false;
         }
         
-        clasWeekBegin = parseData(tdHtml, weekBeginLeft, weekBeginRight, clasName.endPos);
-        if(clasWeekBegin === false) {
+        weekEndResult = parseData(tdHtml, weekEndLeft, weekEndRight, weekBeginResult.endPos);
+        if(weekEndResult === false) {
+            return false;
+        }
+        weekEnd = parseInt(weekEndResult.data);
+        if(isNaN(weekEnd)) {
             return false;
         }
         
-        clasWeekEnd = parseData(tdHtml, weekEndLeft, weekEndRight, clasWeekBegin.endPos);
-        if(clasWeekEnd === false) {
+        numberBeginResult = parseData(tdHtml, numberBeginLeft, numberBeginRight, weekEndResult.endPos);
+        if(numberBeginResult === false) {
+            return false;
+        }
+        numberBegin = parseInt(weekBeginResult.data);
+        if(isNaN(numberBegin)) {
             return false;
         }
         
-        clasNumberBegin = parseData(tdHtml, numberBeginLeft, numberBeginRight, clasWeekEnd.endPos);
-        if(clasNumberBegin === false) {
+        numberEndResult = parseData(tdHtml, numberEndLeft, numberEndRight, numberBeginResult.endPos);
+        if(numberEndResult === false) {
+            return false;
+        }
+        numberEnd = parseInt(numberEndResult.data);
+        if(isNaN(numberEnd)) {
             return false;
         }
         
-        clasNumberEnd = parseData(tdHtml, numberEndLeft, numberEndRight, clasNumberBegin.endPos);
-        if(clasNumberEnd === false) {
+        teacherResult = parseData(tdHtml, teacherLeft, teacherRight, numberEndResult.endPos);
+        if(teacherResult === false) {
             return false;
         }
+        teacher = trimBlank(teacherResult.data);
         
-        clasTeacher = parseData(tdHtml, teacherLeft, teacherRight, clasNumberEnd.endPos);
-        if(clasTeacher === false) {
+        addressResult = parseData(tdHtml, addressLeft, addressRight, teacherResult.endPos);
+        if(addressResult === false) {
             return false;
         }
-        
-        clasAddress = parseData(tdHtml, addressLeft, addressRight, clasTeacher.endPos);
-        if(clasAddress === false) {
-            return false;
-        }
+        address = trimBlank(addressResult.data);
         
         var clas = new Object();
-        clas.name = trimBlank(clasName.data);
+        clas.name = name;
         clas.weekDay = weekDay;
-        clas.numberBegin = parseInt(clasNumberBegin.data);
-        clas.numberEnd = parseInt(clasNumberEnd.data);
-        clas.weekBegin = parseInt(clasWeekBegin.data);
-        clas.weekEnd = parseInt(clasWeekEnd.data);
-        clas.teacher = clasTeacher.data;
-        clas.address = trimBlank(clasAddress.data);
+        clas.numberBegin = numberBegin;
+        clas.numberEnd = numberEnd;
+        clas.weekBegin = weekBegin;
+        clas.weekEnd = weekEnd;
+        clas.teacher = teacher;
+        clas.address = address;
 
         
         console.log(clas);
