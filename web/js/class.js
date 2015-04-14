@@ -60,84 +60,84 @@ $(document).ready(function() {
         return str;
     }
     
+    function parseData(html, left, right, beginPos) {
+        var leftPos = html.indexOf(left, beginPos);
+        if(leftPos === -1) {
+            return false;
+        }
+        leftPos = leftPos + left.length;
+        var rightPos = html.indexOf(right, leftPos);
+        if(rightPos === -1) {
+            return -1;
+        }
+        
+        data = html.slice(leftPos, rightPos);
+        endPos = rightPos;
+        
+        var result = new Object();
+        result.data = data;
+        result.endPos = endPos;
+        return result;
+    }
+    
     function parseClas(tdHtml, classNumber, weekDay) {
 //        console.log(tdHtml);
         
         console.log(tdHtml);
         
-        var spaceHtml = "&nbsp;";
-        
-        var nameBegin = tdHtml.indexOf(spaceHtml);
-        if(nameBegin === -1) {
-            return false;
-        }
-        nameBegin = nameBegin + spaceHtml.length + 1;
-        var nameEnd = tdHtml.indexOf(spaceHtml, nameBegin);
-        if(nameEnd === -1) {
-            return -1;
-        }
-        var clasName = tdHtml.slice(nameBegin, nameEnd);
-        
-        var weekSep = "-";
-        var weekBeginBegin = nameEnd + spaceHtml.length;
-        var weekBeginEnd = tdHtml.indexOf(weekSep, weekBeginBegin);
-        if(weekBeginEnd === -1) {
-            return false;
-        }
-        var clasWeekBegin = tdHtml.slice(weekBeginBegin, weekBeginEnd);
-        
-        var weekUnit = "周";
-        var weekEndBegin = weekBeginEnd + weekSep.length;
-        var weekEndEnd = tdHtml.indexOf(weekUnit, weekEndBegin);
-        if(weekEndEnd === -1) {
-            return false;
-        }
-        var clasWeekEnd = tdHtml.slice(weekEndBegin, weekEndEnd);
-        
-        var numberLeftHtml = "第", numberSepHtml = "-";
-        var numberBeginBegin = tdHtml.indexOf(numberLeftHtml, weekEndEnd);
-        if(numberBeginBegin === -1) {
-            return false;
-        }
-        numberBeginBegin = numberBeginBegin + numberLeftHtml.length;
-        var numberBeginEnd = tdHtml.indexOf(numberSepHtml, numberBeginBegin);
-        if(numberBeginEnd === -1) {
-            return false;
-        }
-        var clasNumberBegin = tdHtml.slice(numberBeginBegin, numberBeginEnd);
-        
-        var numberRightHtml = "节"
-        var numberEndBegin = numberBeginEnd + numberSepHtml.length;
-        var numberEndEnd = tdHtml.indexOf(numberRightHtml, numberEndBegin);
-        if(numberEndEnd === -1) {
-            return false;
-        }
-        var clasNumberEnd = tdHtml.slice(numberEndBegin, numberEndEnd);
-        
+        var nameLeft = "&nbsp;", nameRight = "&nbsp;";
+        var weekBeginLeft = "&nbsp;", weekBeginRight = "-";
+        var weekEndLeft = "-", weekEndRight = "周";
+        var numberBeginLeft = "第", numberBeginRight = "-";
+        var numberEndLeft = "-", numberEndRight = "节";
         var teacherLeft = "<br>", teacherRight = "<br>";
-        var teacherBegin = tdHtml.indexOf(teacherLeft, numberEndEnd);
-        if(teacherBegin === -1) {
-            return false;
-        }
-        teacherBegin = teacherBegin + teacherLeft.length;
-        var teacherEnd = tdHtml.indexOf(teacherRight, teacherBegin);
-        if(teacherEnd === -1) {
-            return false;
-        }
-        var clasTeacher = tdHtml.slice(teacherBegin, teacherEnd);
+        var addressLeft = "<br>", addressRight = "\n";
         
-        var addressBegin = teacherEnd + teacherRight.length;
-        var clasAddress = tdHtml.slice(addressBegin);
+        
+        clasName = parseData(tdHtml, nameLeft, nameRight, 0);
+        if(clasName === false) {
+            return false;
+        }
+        
+        clasWeekBegin = parseData(tdHtml, weekBeginLeft, weekBeginRight, clasName.endPos);
+        if(clasWeekBegin === false) {
+            return false;
+        }
+        
+        clasWeekEnd = parseData(tdHtml, weekEndLeft, weekEndRight, clasWeekBegin.endPos);
+        if(clasWeekEnd === false) {
+            return false;
+        }
+        
+        clasNumberBegin = parseData(tdHtml, numberBeginLeft, numberBeginRight, clasWeekEnd.endPos);
+        if(clasNumberBegin === false) {
+            return false;
+        }
+        
+        clasNumberEnd = parseData(tdHtml, numberEndLeft, numberEndRight, clasNumberBegin.endPos);
+        if(clasNumberEnd === false) {
+            return false;
+        }
+        
+        clasTeacher = parseData(tdHtml, teacherLeft, teacherRight, clasNumberEnd.endPos);
+        if(clasTeacher === false) {
+            return false;
+        }
+        
+        clasAddress = parseData(tdHtml, addressLeft, addressRight, clasTeacher.endPos);
+        if(clasAddress === false) {
+            return false;
+        }
         
         var clas = new Object();
-        clas.name = clasName;
+        clas.name = clasName.data;
         clas.weekDay = weekDay;
-        clas.numberBegin = clasNumberBegin;
-        clas.numberEnd = clasNumberEnd;
-        clas.weekBegin = clasWeekBegin;
-        clas.weekEnd = clasWeekEnd;
-        clas.teacher = clasTeacher;
-        clas.address = clasAddress;
+        clas.numberBegin = clasNumberBegin.data;
+        clas.numberEnd = clasNumberEnd.data;
+        clas.weekBegin = clasWeekBegin.data;
+        clas.weekEnd = clasWeekEnd.data;
+        clas.teacher = clasTeacher.data;
+        clas.address = clasAddress.data;
 
         
         console.log(clas);
