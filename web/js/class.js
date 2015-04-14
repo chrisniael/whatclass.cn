@@ -89,7 +89,7 @@ $(document).ready(function() {
     function parseClas(tdHtml, classNumber, weekDay) {
 //        console.log(tdHtml);
         
-        console.log(tdHtml);
+//        console.log(tdHtml);
         
         var nameLeft = "&nbsp;", nameRight = "&nbsp;";
         var weekBeginLeft = "&nbsp;", weekBeginRight = "-";
@@ -164,8 +164,8 @@ $(document).ready(function() {
         clas.teacher = teacher;
         clas.address = address;
 
-        
-        console.log(clas);
+//        console.log(clas);
+        return clas;
         
     }
     
@@ -178,12 +178,12 @@ $(document).ready(function() {
                 table[i][j] = 0;
             }
         }
-
-        var i = 0;
+        
+        var clases = new Array();
+        var i = 0, index = 0;
         $('.CourseFormTable > tbody > tr').each(function() {
 //            console.log("i=" + i);
 //            console.log(this);
-
             var j = 0;
             $(this).children('td').each(function() {
 //                console.log(this);
@@ -204,7 +204,10 @@ $(document).ready(function() {
 //                    console.log(tdHtml.length);
 
                     if(tdHtml !== "&nbsp;") {   //td标签内容不是空格
-                        parseClas(tdHtml, i, j);    //课表内容
+                        var clas = parseClas(tdHtml, i, j);    //课表内容
+                        clases[index] = clas;
+                        ++index;
+                        
                         for(var k = 0; k < rowspan; ++k) {
                             table[i + k][j] = rowspan;
                         }
@@ -217,6 +220,7 @@ $(document).ready(function() {
             ++i;
         });
 
-        console.log(table);
+//        console.log(table);
+        console.log(clases);
     });
 });
