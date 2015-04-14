@@ -110,7 +110,7 @@ class SiteController extends Controller
             Yii::$app->getUser()->logout();
             $this->redirect(['login']);
         }
-        
+                
         return $this->render('class', [
             'classese' => $classes,
         ]);
