@@ -60,6 +60,12 @@ $(document).ready(function() {
         return str;
     }
     
+    function trimBlank(str) {
+        var charCodes = [32, 160, 9, 10, 11, 12, 13];
+        
+        return trimString(str, charCodes);
+    }
+    
     function parseData(html, left, right, beginPos) {
         var leftPos = html.indexOf(left, beginPos);
         if(leftPos === -1) {
@@ -130,14 +136,14 @@ $(document).ready(function() {
         }
         
         var clas = new Object();
-        clas.name = clasName.data;
+        clas.name = trimBlank(clasName.data);
         clas.weekDay = weekDay;
-        clas.numberBegin = clasNumberBegin.data;
-        clas.numberEnd = clasNumberEnd.data;
-        clas.weekBegin = clasWeekBegin.data;
-        clas.weekEnd = clasWeekEnd.data;
+        clas.numberBegin = parseInt(clasNumberBegin.data);
+        clas.numberEnd = parseInt(clasNumberEnd.data);
+        clas.weekBegin = parseInt(clasWeekBegin.data);
+        clas.weekEnd = parseInt(clasWeekEnd.data);
         clas.teacher = clasTeacher.data;
-        clas.address = clasAddress.data;
+        clas.address = trimBlank(clasAddress.data);
 
         
         console.log(clas);
