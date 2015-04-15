@@ -390,7 +390,7 @@ $(document).ready(function() {
 
         var i = clas.weekBegin;
         do {
-            var summary = "SUMMARY:" + clas.name + " " + clas.weekBegin.toString() + "-" + clas.weekEnd.toString() + "周[" + i + "] " + clas.teacher + "\n";
+            var summary = "SUMMARY:" + clas.name + " (" + clas.weekBegin.toString() + "-" + clas.weekEnd.toString() + "周)[" + i + "] " + clas.teacher + "\n";
 
             var year = startDate.getFullYear().toString();
             var dateMonth = startDate.getMonth() + 1;
