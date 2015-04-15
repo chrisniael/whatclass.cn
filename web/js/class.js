@@ -172,6 +172,14 @@ $(document).ready(function() {
         result.endPos = endPos;
         return result;
     }
+    
+    function removeNameSuffix(name) {
+        suffixBegin = name.lastIndexOf("[");
+        if(suffixBegin === -1) {
+            return name;
+        }
+        return name.slice(0, suffixBegin);
+    }
 
     function parseClas(tdHtml, classNumber, weekDay) {
 //        console.log(tdHtml);
@@ -192,6 +200,7 @@ $(document).ready(function() {
             return false;
         }
         name = trimBlank(nameResult.data);
+        name = removeNameSuffix(name);
 
         weekBeginResult = parseData(tdHtml, weekBeginLeft, weekBeginRight, nameResult.endPos);
         if(weekBeginResult === false) {
