@@ -358,7 +358,6 @@ $(document).ready(function() {
         var events = "";
 
         var eventBegin = "BEGIN:VEVENT\n", eventEnd = "END:VEVENT\n";
-        var summary = "SUMMARY:" + clas.name + " " + clas.weekBegin.toString() + "-" + clas.weekEnd.toString() + "周 " + clas.teacher + "\n";
         var address = "LOCATION:" + clas.address + "\n";
         var dtStartPrefix = "DTSTART;TZID=Asia/Harbin:";
         var dtEndPrefix = "DTEND;TZID=Asia/Harbin:";
@@ -382,6 +381,8 @@ $(document).ready(function() {
 
         var i = clas.weekBegin;
         do {
+            var summary = "SUMMARY:" + clas.name + " " + clas.weekBegin.toString() + "-" + clas.weekEnd.toString() + "周[" + i + "]" + clas.teacher + "\n";
+
             var year = startDate.getFullYear().toString();
             var dateMonth = startDate.getMonth() + 1;
             var month = fillChar(dateMonth.toString(), 2, "0");
