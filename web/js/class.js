@@ -184,7 +184,7 @@ $(document).ready(function() {
     function parseClas(tdHtml, classNumber, weekDay) {
 //        console.log(tdHtml);
 
-        console.log(tdHtml);
+//        console.log(tdHtml);
 
         var nameLeft = "&nbsp;", nameRight = "&nbsp;";
         var weekBeginLeft = "&nbsp;", weekBeginRight = "-";
@@ -260,7 +260,7 @@ $(document).ready(function() {
         clas.teacher = teacher;
         clas.address = address;
 
-        console.log(clas);
+//        console.log(clas);
         return clas;
 
     }
@@ -485,15 +485,32 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
      * @param {type} sep    日期分隔符
      * @returns {string}    20151025
      */
-    function formatDate(dateStr, sep) {
+    function removetDateSep(dateStr, sep) {
         while(dateStr.indexOf(sep) !== -1) {
             dateStr = dateStr.replace(sep, '');
         }
         return dateStr;
     }
     
+    
+    function tranformDateFormat(dateStr) {
+        dateStr = removetDateSep(dateStr, '/');
+//        console.log(dateStr);
+        
+        var year = dateStr.slice(4, 8);
+        var month = dateStr.slice(0, 2);
+        var day = dateStr.slice(2, 4);
+        
+        return year + month + day;
+    }
+    
+    /**
+     * 
+     * @param {type} dateStr    日期格式 10252015 {month}{day}{year}
+     * @returns {Boolean}
+     */
     function isMonday(dateStr) {
-        dateStr = formatDate(dateStr, '/');
+        dateStr = removetDateSep(dateStr, '/');
 //        console.log(dateStr);
         
         var year = dateStr.slice(4, 8);
@@ -611,8 +628,11 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
 
 //        console.log(table);
         //console.log(clases);
-
-        var firstDay = createDate("20150302");
+        
+        var firstDayStr = $('#firstday input').val();
+        firstDayStr = tranformDateFormat(firstDayStr);
+//        console.log(firstDayStr);
+        var firstDay = createDate(firstDayStr);
 //        console.log(firstDay);
 
 //        createEvent(clases[0], firstDay);
