@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <?php
-                $schools = ['' => '请选择学校'];
+                $schools = [];
                 foreach(Yii::$app->params['schools'] as $index => $school)
                 {
                     $schools[$index] = $school;
