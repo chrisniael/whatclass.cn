@@ -85,9 +85,6 @@ $(document).ready(function() {
         }
     ];
 
-//    console.log(numberTime);
-
-
     function inArray(arr, value) {
         var arrLength = arr.length;
         for(var i = 0; i < arrLength; ++i) {
@@ -137,12 +134,8 @@ $(document).ready(function() {
     }
 
     function trimString(str, charCodes) {
-//        console.log(str);
-
         str = ltrimString(str, charCodes);
         str = rtrimString(str, charCodes);
-
-//        console.log(str);
 
         return str;
     }
@@ -182,10 +175,6 @@ $(document).ready(function() {
     }
 
     function parseClas(tdHtml, classNumber, weekDay) {
-//        console.log(tdHtml);
-
-//        console.log(tdHtml);
-
         var nameLeft = "&nbsp;", nameRight = "&nbsp;";
         var weekBeginLeft = "&nbsp;", weekBeginRight = "-";
         var weekEndLeft = "-", weekEndRight = "周";
@@ -260,7 +249,6 @@ $(document).ready(function() {
         clas.teacher = teacher;
         clas.address = address;
 
-//        console.log(clas);
         return clas;
 
     }
@@ -362,8 +350,6 @@ $(document).ready(function() {
     }
 
     function createEvent(clas, firstDay) {
-//        console.log(clas);
-
         var events = "";
 
         var eventBegin = "BEGIN:VEVENT\n", eventEnd = "END:VEVENT\n";
@@ -373,20 +359,14 @@ $(document).ready(function() {
 
         //前进 n 天
         var date  = advanceDays(firstDay, clas.weekDay - 1);
-//        console.log(date);
 
         var startDate = advanceWeeks(date, clas.weekBegin - 1);
         startDate = advanceHours(startDate, numberTime[clas.numberBegin].beginHour);
         startDate = advanceMinutes(startDate, numberTime[clas.numberBegin].beginMinute);
 
-//        console.log(startDate);
-
         var endDate = advanceWeeks(date, clas.weekBegin - 1);
-//        console.log(endDate);
         endDate = advanceHours(endDate, numberTime[clas.numberEnd].endHour);
         endDate = advanceMinutes(endDate, numberTime[clas.numberEnd].endMinute);
-
-//        console.log(endDate);
 
         var i = clas.weekBegin;
         do {
@@ -415,15 +395,10 @@ $(document).ready(function() {
             startDate = advanceWeeks(startDate, 1);
             endDate = advanceWeeks(endDate, 1);
 
-//            console.log(oneEvent);
-
-//            console.log(i);
             events += oneEvent;
 
             ++i;
         } while(i <= clas.weekEnd);
-
-//        console.log(events);
 
         return events;
     }
@@ -459,10 +434,6 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
         }
         calendar += calendarEnd;
 
-//        console.log(calendarBegin);
-
-//        console.log(calendar);
-
         return calendar;
     }
 
@@ -495,7 +466,6 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
     
     function tranformDateFormat(dateStr) {
         dateStr = removetDateSep(dateStr, '/');
-//        console.log(dateStr);
         
         var year = dateStr.slice(4, 8);
         var month = dateStr.slice(0, 2);
@@ -511,15 +481,10 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
      */
     function isMonday(dateStr) {
         dateStr = removetDateSep(dateStr, '/');
-//        console.log(dateStr);
         
         var year = dateStr.slice(4, 8);
         var month = dateStr.slice(0, 2);
         var day = dateStr.slice(2, 4);
-        
-//        console.log(year);
-//        console.log(month);
-//        console.log(day);
         
         date = new Date();
         date.setFullYear(year);
@@ -529,9 +494,6 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
         date.setHours(0);
         date.setMinutes(0);
         date.setSeconds(0);
-        
-//        console.log(date);
-//        console.log(date.getDay());
         
         return date.getDay() === 1;
     }
@@ -588,14 +550,10 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
         var clases = new Array();
         var i = 0, index = 0;
         $('.CourseFormTable > tbody > tr').each(function() {
-//            console.log("i=" + i);
-//            console.log(this);
             var j = 0;
             $(this).children('td').each(function() {
-//                console.log(this);
 
                 var rowspan = $(this).attr('rowspan');
-//                console.log('rowspan=' + rowspan);
 
                 while(table[i][j] !== 0) {    //课程连续导致 td 个数不统一
                     ++j;
@@ -606,8 +564,6 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
                 }
                 else {
                     var tdHtml = $(this).html();
-//                    console.log(tdHtml);
-//                    console.log(tdHtml.length);
 
                     if(tdHtml !== "&nbsp;") {   //td标签内容不是空格
                         var clas = parseClas(tdHtml, i, j);    //课表内容
@@ -619,25 +575,17 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
                         }
                     }
                 }
-//                console.log("j=" + j);
                 ++j;
             });
 
             ++i;
         });
 
-//        console.log(table);
-        //console.log(clases);
-        
         var firstDayStr = $('#firstday input').val();
         firstDayStr = tranformDateFormat(firstDayStr);
-//        console.log(firstDayStr);
         var firstDay = createDate(firstDayStr);
-//        console.log(firstDay);
 
-//        createEvent(clases[0], firstDay);
         calendar = createCalendar(clases, firstDay);
-//        console.log(calendar);
         
         var filename = $("#username").text();
         filename = parseData(filename, "(", ")", 0);
@@ -648,7 +596,6 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
             filename = filename.data;
         }
         filename += ".ics";
-//        console.log(filename);
         
         createDownloadFile(filename, calendar);
 
