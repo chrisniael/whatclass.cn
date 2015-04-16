@@ -42,7 +42,11 @@ AppAsset::register($this);
                         ['label' => '登录', 'url' => ['/site/login']] :
                         ['label' => '退出 (' . Yii::$app->user->identity->username . ')',
                             'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
+                            'linkOptions' => [
+                                'data-method' => 'post',
+                                'id' => 'username',
+                                ]
+                            ],
                 ],
             ]);
             NavBar::end();

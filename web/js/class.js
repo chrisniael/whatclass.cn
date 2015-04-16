@@ -85,7 +85,7 @@ $(document).ready(function() {
         }
     ];
 
-    console.log(numberTime);
+//    console.log(numberTime);
 
 
     function inArray(arr, value) {
@@ -478,8 +478,87 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
         aLink.href = URL.createObjectURL(blob);
         aLink.dispatchEvent(evt);
     }
+    
+    /**
+     * 去除日期分隔符
+     * @param {type} dateStr    2015{sep}10{sep}25
+     * @param {type} sep    日期分隔符
+     * @returns {string}    20151025
+     */
+    function formatDate(dateStr, sep) {
+        while(dateStr.indexOf(sep) !== -1) {
+            dateStr = dateStr.replace(sep, '');
+        }
+        return dateStr;
+    }
+    
+    function isMonday(dateStr) {
+        dateStr = formatDate(dateStr, '/');
+//        console.log(dateStr);
+        
+        var year = dateStr.slice(4, 8);
+        var month = dateStr.slice(0, 2);
+        var day = dateStr.slice(2, 4);
+        
+//        console.log(year);
+//        console.log(month);
+//        console.log(day);
+        
+        date = new Date();
+        date.setFullYear(year);
+        date.setMonth(month - 1);
+        date.setDate(day);
+        date.setHours(0);
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        
+//        console.log(date);
+//        console.log(date.getDay());
+        
+        return date.getDay() === 1;
+    }
+    
+    function checkFirstDay() {
+        var value = $('#firstday input').val();
+        var requiredObj = $('#firstday');
+        
+        if(value.length === 0) {
+            requiredObj.addClass('has-error');
+            requiredObj.children('.help-block-error').text('开学第一天不能为空。');
+            $('#dump').attr('disabled', 'disabled');
+            return false;
+        }
+        else {
+            if(isMonday(value) === false) {
+                requiredObj.addClass('has-error');
+                requiredObj.children('.help-block-error').text('开学第一天应该为周一。');
+                $('#dump').attr('disabled', 'disabled');
+                return false;
+            }
+            else {
+                requiredObj.removeClass('has-error');
+                requiredObj.children('.help-block-error').text('');
+                requiredObj.addClass('has-success');
+                $('#dump').removeAttr('disabled');
+                return true;
+            }
+        }
+    }
+    
+    $('#firstday input').focusout(function() {
+        checkFirstDay();
+    });
+    
+    $('#firstday input').change(function() {
+        checkFirstDay();
+    });
 
     $('#dump').click(function() {
+        if(checkFirstDay() === false) {
+            return false;
+        }
+        
         var table = new Array();    //记录课程连续的次数
         for(var i = 0; i <= 14; ++i) {
             table[i] = new Array();
@@ -540,7 +619,7 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
         calendar = createCalendar(clases, firstDay);
 //        console.log(calendar);
         
-        var filename = $("#w1 > li:last > a").text();
+        var filename = $("#username").text();
         filename = parseData(filename, "(", ")", 0);
         if(filename === false) {
             filename = "课表日程";

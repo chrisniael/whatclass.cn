@@ -10,28 +10,33 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     
     <div class="row">
-        <div class="col-lg-3">
-        <?php
-        echo DatePicker::widget([
-            'name' => 'firstday',
-            'value' => '',
-            'pluginOptions' => [
-                'autoclose'=>true,
-                'format' => 'mm/dd/yyyy'
-            ],
-            'options' => [
-                'placeholder' => '开学第一天',
-            ],
-        ]);
-        ?>
+        <div class="col-lg-3" id="firstday">
+            <?php
+            echo DatePicker::widget([
+                'name' => 'firstday',
+                'value' => '',
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'mm/dd/yyyy'
+                ],
+                'options' => [
+                    'placeholder' => '开学第一天',
+                ],
+            ]);
+            ?>
+            <p class="help-block help-block-error"></p>
         </div>
     
         <div class="col-lg-5">
-        <?= Html::a('导出ics文件', NULL, ['class' => 'btn btn-primary', 'id' => "dump"]) ?>
+            <?= Html::button('<span class="glyphicon glyphicon-download" aria-hidden="true"></span> 导出ics文件', [
+                'class' => 'btn btn-primary',
+                'id' => "dump",
+                'disabled' => 'disabled',
+                ]) ?>
         </div>
     </div>
     
-    <div style="margin-top: 20px;">
+    <div style="margin-top: 15px;">
     <?= $classese ?>
     </div>
 </div>
