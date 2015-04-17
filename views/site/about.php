@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <ul>
         <li>
             <p>
-                如果你对这个项目感兴趣，你可以 Fork 或 Clone 它的源码
+                如果你对这个项目感兴趣，你可以 <span class="label label-default">Fork</span> 或 <span class="label label-default">Clone</span> 它的源码
             </p>
 
             <p>
