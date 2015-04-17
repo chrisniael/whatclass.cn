@@ -90,105 +90,6 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
-.CourseFormTable {
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 14px;
-    background: #FAFAFA;
-    border-collapse: inherit;
-}
-
-.CourseFormTable caption {
-    border-top: 1px #98b1c8 solid;
-    border-left: 1px #98b1c8 solid;
-    border-right: 1px #98b1c8 solid;
-    font-size: 14px;
-    height: 35px !important;
-    color: black;
-    font-weight: normal;
-    text-align: center;
-}
-
-.CourseFormTable th {
-    border-top: 1px #98b1c8 solid;
-    border-left: 1px #98b1c8 solid;
-    font-weight: normal;
-    font-size: 14px;
-    height: 28px;
-    color: black;
-    text-align: center;
-}
-
-.CourseFormTable th:last-child {
-    border-right: 1px #98b1c8 solid;
-}
-
-.CourseFormTable td {
-    border-top: 1px #98b1c8 solid;
-    border-left: 1px #98b1c8 solid;
-    height: 28px !important;
-    width: 128px;
-    text-align: center;
-}
-
-.CourseFormTable td:last-child {
-    border-right: 1px #98b1c8 solid;
-}
-
-td.firstHiddenTd {
-    height: 38px;
-    height: 38px !important;
-}
-
-.CourseFormTable > tbody > tr:last-child > td {
-    border-bottom: 1px #98b1c8 solid;
-}
-
-.NoFitCourse {
-    border-collapse: collapse;
-    font-size: 14px;
-    background: #FAFAFA;
-    width: 100%;
-}
-
-.NoFitCourse caption {
-    height: 35px !important;
-    font-weight: normal;
-    text-align: center;
-    font-size: 14px;
-    color: black;
-    border-top: 0px;
-    border-right: 0px;
-    border-bottom: 0px;
-    border-left: 0px;
-}
-
-.NoFitCourse th {
-    border-top: 1px #98b1c8 solid;
-    border-right: 1px #98b1c8 solid;
-    border-bottom: 0px;
-    border-left: 0px;
-    font-size: 14px;
-    height: 20px;
-    color: black;
-    text-align: center;
-}
-
-.NoFitCourse th:last-child {
-    border-right: 0px;
-}
-
-.NoFitCourse td {
-    border-top: 1px #98b1c8 solid;
-    border-right: 1px #98b1c8 solid;
-    border-bottom: 0px;
-    border-left: 0px;
-}
-
-.NoFitCourse td:last-child {
-    border-right: 0px;
-}
-
 .carousel-control.left, .carousel-control.right {
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .0001) 100%);
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .0001) 100%);
@@ -200,4 +101,16 @@ td.firstHiddenTd {
 
 .jumbotron {
     margin-bottom: 0px;
+}
+
+.time-table td, .notime-table th {
+    width: 12.5%;
+}
+
+.time-table th {
+    text-align: center;
+}
+
+.time-table td {
+    text-align: center;
 }

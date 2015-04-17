@@ -38,6 +38,7 @@ class Classes
         
         self::removeEmptyTd($result);
         
+        self::replaceTableClass($result);
         
         return $result;
     }
@@ -74,5 +75,16 @@ class Classes
     {
         $removeHtml = '<th class="firstHiddenTd">';
         $table = str_replace($removeHtml, "", $table);
+    }
+    
+    public static function replaceTableClass(&$table)
+    {
+        $replaceTableClass = 'CourseFormTable';
+        $newTableClass = 'table table-bordered time-table';
+        $table = str_replace($replaceTableClass, $newTableClass, $table);
+        
+        $replaceTableClass = 'NoFitCourse';
+        $newTableClass = 'table table-bordered notime-table';
+        $table = str_replace($replaceTableClass, $newTableClass, $table);
     }
 }
