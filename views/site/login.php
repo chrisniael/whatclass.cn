@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-lg-6">
                     <?= $form->field($model, 'captcha', ['template' => "{input}\n{hint}\n{error}"])->textInput(['maxlength' => 4]) ?>
                     </div>
-                    <div class="col-lg-6" style="padding-top: 5px;">
+                    <div class="col-lg-6" style="padding-top: 5px; margin-bottom: 15px;">
                         <?= Html::img(['site/captcha'], ['class' => 'img-rounded']) ?>
                     </div>
                 </div>
