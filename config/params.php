@@ -10,4 +10,8 @@ return [
     'loginUrl' => 'http://ssfw1.hlju.edu.cn/ssfw/j_spring_ids_security_check',
     'classUrl' => 'http://ssfw1.hlju.edu.cn/ssfw/pkgl/kcbxx/xskcb.do',
     'logoutUrl' => 'http://ssfw1.hlju.edu.cn/ssfw/j_spring_security_logout',
+    'loginUrlSuffix' => 'site/login',
+    'icsHelpUrl' => '',
+    'outlookIndexUrl' => 'http://www.outlook.com',
+    
 ];
