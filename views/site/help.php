@@ -12,5 +12,5 @@ $this->params['breadcrumbs'][] = $this->title;
         This is the Help page. You may modify the following file to customize its content:
     </p>
 
-    <code><?= __FILE__ ?></code>
+    
 </div>

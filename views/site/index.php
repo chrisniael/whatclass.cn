@@ -1,20 +1,21 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'My Yii Application';
+$this->title = '什么课';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1 style="margin-bottom: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;还在打印课表？</h1>
+        <h1 style="margin-top: 0px;">&nbsp;&nbsp;呵呵~</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead"></p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <p><a class="" href="index.php?r=site/class">立刻使用</a></p>
     </div>
 
     <div class="body-content">
 
-        <div class="row">
+<!--        <div class="row">
             <div class="col-lg-4">
                 <h2>Heading</h2>
 
@@ -45,7 +46,7 @@ $this->title = 'My Yii Application';
 
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
             </div>
-        </div>
+        </div>-->
 
     </div>
 </div>

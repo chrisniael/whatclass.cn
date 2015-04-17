@@ -9,7 +9,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
     
-    <div class="row">
+    <div class="row" style="margin-top: 15px;">
         <div class="col-lg-3" id="firstday">
             <?php
             echo DatePicker::widget([
