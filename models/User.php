@@ -154,6 +154,12 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         return $captcha;
     }
     
+    public static function CaptchaURI()
+    {
+        $captcha = self::generateCaptcha();
+        return "data:image/gif;base64," . base64_encode($captcha);
+    }
+    
     public static function logout()
     {
         

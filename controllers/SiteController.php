@@ -62,6 +62,7 @@ class SiteController extends Controller
         } else {
             return $this->render('login', [
                 'model' => $model,
+                'captcha' => User::CaptchaURI(),
             ]);
         }
     }
@@ -117,6 +118,6 @@ class SiteController extends Controller
     
     public function actionCaptcha()
     {
-        return User::generateCaptcha();
+        return User::CaptchaURI();
     }
 }

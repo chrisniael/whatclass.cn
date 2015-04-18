@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'captcha', ['template' => "{input}\n{hint}\n{error}"])->textInput(['maxlength' => 4]) ?>
                     </div>
                     <div class="col-lg-6" style="padding-top: 5px; margin-bottom: 15px;">
-                        <?= Html::img(['site/captcha'], ['class' => 'img-rounded']) ?>
+                        <?= Html::a(Html::img($captcha, ['class' => 'img-rounded captcha', 'alt' => 'captcha', 'height' => '22px']), ['captcha'], ['id' => "captcha"]); ?>
                     </div>
                 </div>
                 <div class="form-group">
@@ -44,3 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+<?php
+$this->registerJsFile(Yii::$app->request->getBaseUrl() . "/js/login.js", ['depends' => [yii\web\JqueryAsset::className()], 'position' => yii\web\View::POS_END]);
+?>
