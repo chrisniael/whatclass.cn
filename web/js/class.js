@@ -549,7 +549,7 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
         
         var clases = new Array();
         var i = 0, index = 0;
-        $('.CourseFormTable > tbody > tr').each(function() {
+        $('.time-table > tbody > tr').each(function() {
             var j = 0;
             $(this).children('td').each(function() {
 
