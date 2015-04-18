@@ -16,6 +16,8 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="什么课,课程表软件,课表软件,whatclass.cn,www.whatclass.cn,whatclass">
+    <meta name="description" content="当前最前沿的手机课表解决方案,手机无需安装任何软件，课表与手机完美融合。">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
