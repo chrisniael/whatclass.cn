@@ -120,4 +120,18 @@ class SiteController extends Controller
     {
         return User::CaptchaURI();
     }
+    
+    public function actionDownload()
+    {
+        if (!empty($_POST['name']) && !empty($_POST['content']))
+        {
+            $name    = urldecode($_POST['name']);
+            $content = urldecode($_POST['content']);
+            Header("Content-type: application/octet-stream");
+            Header("Accept-Ranges: bytes");
+            Header("Accept-Length: " . strlen($content));
+            Header("Content-Disposition: attachment; filename=" . $name);
+            echo $content;
+        }
+    }
 }

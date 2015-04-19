@@ -440,14 +440,11 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
     /*
      * 生成下载文件
      */
-    function createDownloadFile(fileName, content) {
-        var aLink = document.createElement('a');
-        var blob = new Blob([content]);
-        var evt = document.createEvent("HTMLEvents");
-        evt.initEvent("click", false, false);   //initEvent 不加后两个参数在FF下会报错
-        aLink.download = fileName;
-        aLink.href = URL.createObjectURL(blob);
-        aLink.dispatchEvent(evt);
+    function createDownloadFile(name, content) {
+        var downloadForm = $('#downloadForm');
+        downloadForm.children('input[name=name]').val(encodeURIComponent(name));
+        downloadForm.children('input[name=content]').val(encodeURIComponent(content));
+        downloadForm.submit();
     }
     
     /**
@@ -598,6 +595,5 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
         filename += ".ics";
         
         createDownloadFile(filename, calendar);
-
     });
 });
