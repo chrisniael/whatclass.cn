@@ -48,9 +48,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'target' => '_blank',
                 ]) ?>
         </div>
-    </div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<?= Html::a('查看校历', Yii::$app->params['schoolCalendar'], ['target' => '_blank']) ?>
+		</div>
+	</div>
     
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 10px;">
     <?= $classese ?>
     </div>
 </div>

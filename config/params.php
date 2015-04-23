@@ -13,5 +13,6 @@ return [
     'loginUrlSuffix' => 'index.php?r=site/login',
     'icsHelpUrl' => 'http://zh.wikipedia.org/wiki/ICalendar',
     'outlookIndexUrl' => 'http://www.outlook.com',
-    'domain' => 'http://whatclass.cn',
+	'domain' => 'http://whatclass.cn',
+	'schoolCalendar' => 'http://www.hlju.edu.cn/2011/index_date.html',
 ];
