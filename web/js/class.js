@@ -154,7 +154,7 @@ $(document).ready(function() {
         leftPos = leftPos + left.length;
         var rightPos = html.indexOf(right, leftPos);
         if(rightPos === -1) {
-            return -1;
+            return false;
         }
 
         data = html.slice(leftPos, rightPos);
@@ -165,6 +165,32 @@ $(document).ready(function() {
         result.endPos = endPos;
         return result;
     }
+
+	function parseAddressData(html, left, rights, beginPos) {
+        var leftPos = html.indexOf(left, beginPos);
+        if(leftPos === -1) {
+            return false;
+        }
+        leftPos = leftPos + left.length;
+
+		var rightPos = html.length;
+
+		for(var i = 0; i < rights.length; ++i) {
+			var pos = html.indexOf(rights[i], leftPos);
+			if(pos !== -1 && pos < rightPos) {
+				rightPos = pos;
+			}
+		}
+
+        data = html.slice(leftPos, rightPos);
+        endPos = rightPos;
+
+        var result = new Object();
+        result.data = data;
+        result.endPos = endPos;
+        return result;
+    }
+
     
     function removeNameSuffix(name) {
         suffixBegin = name.lastIndexOf("[");
@@ -181,7 +207,7 @@ $(document).ready(function() {
         var numberBeginLeft = "第", numberBeginRight = "-";
         var numberEndLeft = "-", numberEndRight = "节";
         var teacherLeft = "<br>", teacherRight = "<br>";
-        var addressLeft = "<br>", addressRight = "\n";
+        //var addressLeft = "<br>", addressRight = "\n";
 
 
         nameResult = parseData(tdHtml, nameLeft, nameRight, 0);
@@ -233,11 +259,20 @@ $(document).ready(function() {
         }
         teacher = trimBlank(teacherResult.data);
 
+		/*
         addressResult = parseData(tdHtml, addressLeft, addressRight, teacherResult.endPos);
         if(addressResult === false) {
             return false;
         }
         address = trimBlank(addressResult.data);
+		*/
+
+        var addressLeft = "<br>", addressRight = ["\n", "&", "<"];
+		addressResult = parseAddressData(tdHtml, addressLeft, addressRight, teacherResult.endPos);
+		if(addressResult === false) {
+			return false;
+		}
+		address = trimBlank(addressResult.data);
 
         var clas = new Object();
         clas.name = name;
@@ -250,7 +285,6 @@ $(document).ready(function() {
         clas.address = address;
 
         return clas;
-
     }
 
     function createDate(dateString) {
