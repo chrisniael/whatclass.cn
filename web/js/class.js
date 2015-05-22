@@ -1,94 +1,94 @@
 /* global URL */
 
-$(document).ready(function() {
+$(document).ready(function () {
     var calendar = "";
     var numberTime = [
         {
         },
         {
-                "beginHour" : 8,
-                "beginMinute" : 0,
-                "endHour" : 8,
-                "endMinute" : 40
+            "beginHour": 8,
+            "beginMinute": 0,
+            "endHour": 8,
+            "endMinute": 40
         },
         {
-                "beginHour" : 8,
-                "beginMinute" : 50,
-                "endHour" : 9,
-                "endMinute" : 30
+            "beginHour": 8,
+            "beginMinute": 50,
+            "endHour": 9,
+            "endMinute": 30
         },
         {
-                "beginHour" : 10,
-                "beginMinute" : 0,
-                "endHour" : 10,
-                "endMinute" : 40
+            "beginHour": 10,
+            "beginMinute": 0,
+            "endHour": 10,
+            "endMinute": 40
         },
         {
-                "beginHour" : 10,
-                "beginMinute" : 50,
-                "endHour" : 11,
-                "endMinute" : 30
+            "beginHour": 10,
+            "beginMinute": 50,
+            "endHour": 11,
+            "endMinute": 30
         },
         {
-                "beginHour" : 11,
-                "beginMinute" : 40,
-                "endHour" : 12,
-                "endMinute" : 20
+            "beginHour": 11,
+            "beginMinute": 40,
+            "endHour": 12,
+            "endMinute": 20
         },
         {
-                "beginHour" : 13,
-                "beginMinute" : 30,
-                "endHour" : 14,
-                "endMinute" : 10
+            "beginHour": 13,
+            "beginMinute": 30,
+            "endHour": 14,
+            "endMinute": 10
         },
         {
-                "beginHour" : 14,
-                "beginMinute" : 20,
-                "endHour" : 15,
-                "endMinute" : 0
+            "beginHour": 14,
+            "beginMinute": 20,
+            "endHour": 15,
+            "endMinute": 0
         },
         {
-                "beginHour" : 15,
-                "beginMinute" : 30,
-                "endHour" : 16,
-                "endMinute" : 10
+            "beginHour": 15,
+            "beginMinute": 30,
+            "endHour": 16,
+            "endMinute": 10
         },
         {
-                "beginHour" : 16,
-                "beginMinute" : 20,
-                "endHour" : 17,
-                "endMinute" : 00
+            "beginHour": 16,
+            "beginMinute": 20,
+            "endHour": 17,
+            "endMinute": 00
         },
         {
-                "beginHour" : 18,
-                "beginMinute" : 0,
-                "endHour" : 18,
-                "endMinute" : 40
+            "beginHour": 18,
+            "beginMinute": 0,
+            "endHour": 18,
+            "endMinute": 40
         },
         {
-                "beginHour" : 18,
-                "beginMinute" : 50,
-                "endHour" : 19,
-                "endMinute" : 30
+            "beginHour": 18,
+            "beginMinute": 50,
+            "endHour": 19,
+            "endMinute": 30
         },
         {
-                "beginHour" : 19,
-                "beginMinute" : 40,
-                "endHour" : 20,
-                "endMinute" : 20
+            "beginHour": 19,
+            "beginMinute": 40,
+            "endHour": 20,
+            "endMinute": 20
         },
         {
-                "beginHour" : 20,
-                "beginMinute" : 30,
-                "endHour" : 21,
-                "endMinute" : 10
+            "beginHour": 20,
+            "beginMinute": 30,
+            "endHour": 21,
+            "endMinute": 10
         }
     ];
 
     function inArray(arr, value) {
         var arrLength = arr.length;
-        for(var i = 0; i < arrLength; ++i) {
-            if(arr[i] === value) {
+        for (var i = 0; i < arrLength; ++i) {
+            if (arr[i] === value) {
                 return true;
             }
         }
@@ -99,9 +99,9 @@ $(document).ready(function() {
     function ltrimString(str, charCodes) {
         var strLength = str.length;
         var i = 0;
-        while(i < strLength) {
+        while (i < strLength) {
             var charCode = str[i].charCodeAt(0);
-            if(inArray(charCodes, charCode)) {
+            if (inArray(charCodes, charCode)) {
                 ++i;
                 continue;
             }
@@ -118,9 +118,9 @@ $(document).ready(function() {
         //去掉后面的 空格和换行符
         var strLength = str.length;
         var j = strLength - 1;
-        while(j >= 0) {
+        while (j >= 0) {
             var charCode = str[j].charCodeAt(0);
-            if(inArray(charCodes, charCode)) {
+            if (inArray(charCodes, charCode)) {
                 --j;
                 continue;
             }
@@ -148,12 +148,12 @@ $(document).ready(function() {
 
     function parseData(html, left, right, beginPos) {
         var leftPos = html.indexOf(left, beginPos);
-        if(leftPos === -1) {
+        if (leftPos === -1) {
             return false;
         }
         leftPos = leftPos + left.length;
         var rightPos = html.indexOf(right, leftPos);
-        if(rightPos === -1) {
+        if (rightPos === -1) {
             return false;
         }
 
@@ -166,21 +166,21 @@ $(document).ready(function() {
         return result;
     }
 
-	function parseAddressData(html, left, rights, beginPos) {
+    function parseAddressData(html, left, rights, beginPos) {
         var leftPos = html.indexOf(left, beginPos);
-        if(leftPos === -1) {
+        if (leftPos === -1) {
             return false;
         }
         leftPos = leftPos + left.length;
 
-		var rightPos = html.length;
+        var rightPos = html.length;
 
-		for(var i = 0; i < rights.length; ++i) {
-			var pos = html.indexOf(rights[i], leftPos);
-			if(pos !== -1 && pos < rightPos) {
-				rightPos = pos;
-			}
-		}
+        for (var i = 0; i < rights.length; ++i) {
+            var pos = html.indexOf(rights[i], leftPos);
+            if (pos !== -1 && pos < rightPos) {
+                rightPos = pos;
+            }
+        }
 
         data = html.slice(leftPos, rightPos);
         endPos = rightPos;
@@ -191,10 +191,10 @@ $(document).ready(function() {
         return result;
     }
 
-    
+
     function removeNameSuffix(name) {
         suffixBegin = name.lastIndexOf("[");
-        if(suffixBegin === -1) {
+        if (suffixBegin === -1) {
             return name;
         }
         return name.slice(0, suffixBegin);
@@ -211,68 +211,68 @@ $(document).ready(function() {
 
 
         nameResult = parseData(tdHtml, nameLeft, nameRight, 0);
-        if(nameResult === false) {
+        if (nameResult === false) {
             return false;
         }
         name = trimBlank(nameResult.data);
         name = removeNameSuffix(name);
 
         weekBeginResult = parseData(tdHtml, weekBeginLeft, weekBeginRight, nameResult.endPos);
-        if(weekBeginResult === false) {
+        if (weekBeginResult === false) {
             return false;
         }
         weekBegin = parseInt(weekBeginResult.data);
-        if(isNaN(weekBegin)) {
+        if (isNaN(weekBegin)) {
             return false;
         }
 
         weekEndResult = parseData(tdHtml, weekEndLeft, weekEndRight, weekBeginResult.endPos);
-        if(weekEndResult === false) {
+        if (weekEndResult === false) {
             return false;
         }
         weekEnd = parseInt(weekEndResult.data);
-        if(isNaN(weekEnd)) {
+        if (isNaN(weekEnd)) {
             return false;
         }
 
         numberBeginResult = parseData(tdHtml, numberBeginLeft, numberBeginRight, weekEndResult.endPos);
-        if(numberBeginResult === false) {
+        if (numberBeginResult === false) {
             return false;
         }
         numberBegin = parseInt(numberBeginResult.data);
-        if(isNaN(numberBegin)) {
+        if (isNaN(numberBegin)) {
             return false;
         }
 
         numberEndResult = parseData(tdHtml, numberEndLeft, numberEndRight, numberBeginResult.endPos);
-        if(numberEndResult === false) {
+        if (numberEndResult === false) {
             return false;
         }
         numberEnd = parseInt(numberEndResult.data);
-        if(isNaN(numberEnd)) {
+        if (isNaN(numberEnd)) {
             return false;
         }
 
         teacherResult = parseData(tdHtml, teacherLeft, teacherRight, numberEndResult.endPos);
-        if(teacherResult === false) {
+        if (teacherResult === false) {
             return false;
         }
         teacher = trimBlank(teacherResult.data);
 
-		/*
-        addressResult = parseData(tdHtml, addressLeft, addressRight, teacherResult.endPos);
-        if(addressResult === false) {
+        /*
+         addressResult = parseData(tdHtml, addressLeft, addressRight, teacherResult.endPos);
+         if(addressResult === false) {
+         return false;
+         }
+         address = trimBlank(addressResult.data);
+         */
+
+        var addressLeft = "<br>", addressRight = ["\n", "&", "<"];
+        addressResult = parseAddressData(tdHtml, addressLeft, addressRight, teacherResult.endPos);
+        if (addressResult === false) {
             return false;
         }
         address = trimBlank(addressResult.data);
-		*/
-
-        var addressLeft = "<br>", addressRight = ["\n", "&", "<"];
-		addressResult = parseAddressData(tdHtml, addressLeft, addressRight, teacherResult.endPos);
-		if(addressResult === false) {
-			return false;
-		}
-		address = trimBlank(addressResult.data);
 
         var clas = new Object();
         clas.name = name;
@@ -291,49 +291,49 @@ $(document).ready(function() {
         date = new Date();
 
         var year = dateString.slice(0, 4);
-        if(year.length === 0) {
-                year = 0;
+        if (year.length === 0) {
+            year = 0;
         }
 
         var month = dateString.slice(4, 6);
-        if(month.length === 0) {
-                month = 0;
+        if (month.length === 0) {
+            month = 0;
         }
         else {
-                month = parseInt(month) - 1;
+            month = parseInt(month) - 1;
         }
 
         var day = dateString.slice(6, 8);
-        if(day.length === 0) {
-                day = 1;
+        if (day.length === 0) {
+            day = 1;
         }
         else {
-                day = parseInt(day);
+            day = parseInt(day);
         }
 
         var hour = dateString.slice(8, 10);
-        if(hour.length === 0) {
-                hour = 0;
+        if (hour.length === 0) {
+            hour = 0;
         }
         else {
-                hour = parseInt(hour);
+            hour = parseInt(hour);
         }
 
         var minute = dateString.slice(10, 12);
-        if(minute.length === 0) {
-                minute = 0;
+        if (minute.length === 0) {
+            minute = 0;
         }
         else {
-                minute = parseInt(minute);
+            minute = parseInt(minute);
         }
 
         var second = dateString.slice(12, 14);
-        if(second.length === 0) {
-                second = 0;
+        if (second.length === 0) {
+            second = 0;
         }
         else
         {
-                second = parseInt(second);
+            second = parseInt(second);
         }
 
         date.setFullYear(year)
@@ -347,35 +347,35 @@ $(document).ready(function() {
     }
 
     function advanceSeconds(date, seconds) {
-            var result = new Date();
+        var result = new Date();
 
-            var timeStamp = date.getTime();
-            timeStamp = timeStamp + seconds * 1000;
-            result.setTime(timeStamp);
-            return result;
+        var timeStamp = date.getTime();
+        timeStamp = timeStamp + seconds * 1000;
+        result.setTime(timeStamp);
+        return result;
     }
 
     function advanceMinutes(date, minutes) {
-            return advanceSeconds(date, minutes * 60);
+        return advanceSeconds(date, minutes * 60);
     }
 
     function advanceHours(date, hours) {
-            return advanceMinutes(date, hours * 60);
+        return advanceMinutes(date, hours * 60);
     }
 
     function advanceDays(date, days) {
-            return advanceHours(date, 24 * days);
+        return advanceHours(date, 24 * days);
     }
 
     function advanceWeeks(date, weeks) {
-            return advanceDays(date, 7 * weeks);
+        return advanceDays(date, 7 * weeks);
     }
 
     function fillChar(str, length, ch) {
         var strLength = str.length;
 
         var number = length - strLength;
-        while(number > 0) {
+        while (number > 0) {
             str = ch + str;
             --number;
         }
@@ -392,7 +392,7 @@ $(document).ready(function() {
         var dtEndPrefix = "DTEND;TZID=Asia/Harbin:";
 
         //前进 n 天
-        var date  = advanceDays(firstDay, clas.weekDay - 1);
+        var date = advanceDays(firstDay, clas.weekDay - 1);
 
         var startDate = advanceWeeks(date, clas.weekBegin - 1);
         startDate = advanceHours(startDate, numberTime[clas.numberBegin].beginHour);
@@ -432,7 +432,7 @@ $(document).ready(function() {
             events += oneEvent;
 
             ++i;
-        } while(i <= clas.weekEnd);
+        } while (i <= clas.weekEnd);
 
         return events;
     }
@@ -463,7 +463,7 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
 
         var calendar = calendarBegin;
         var clasesLength = clases.length;
-        for(var i = 0; i < clasesLength; ++i) {
+        for (var i = 0; i < clasesLength; ++i) {
             calendar += createEvent(clases[i], firstDay);
         }
         calendar += calendarEnd;
@@ -480,7 +480,7 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
         downloadForm.children('input[name=content]').val(encodeURIComponent(content));
         downloadForm.submit();
     }
-    
+
     /**
      * 去除日期分隔符
      * @param {type} dateStr    2015{sep}10{sep}25
@@ -488,23 +488,23 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
      * @returns {string}    20151025
      */
     function removetDateSep(dateStr, sep) {
-        while(dateStr.indexOf(sep) !== -1) {
+        while (dateStr.indexOf(sep) !== -1) {
             dateStr = dateStr.replace(sep, '');
         }
         return dateStr;
     }
-    
-    
+
+
     function tranformDateFormat(dateStr) {
         dateStr = removetDateSep(dateStr, '/');
-        
+
         var year = dateStr.slice(4, 8);
         var month = dateStr.slice(0, 2);
         var day = dateStr.slice(2, 4);
-        
+
         return year + month + day;
     }
-    
+
     /**
      * 
      * @param {type} dateStr    日期格式 10252015 {month}{day}{year}
@@ -512,11 +512,11 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
      */
     function isMonday(dateStr) {
         dateStr = removetDateSep(dateStr, '/');
-        
+
         var year = dateStr.slice(4, 8);
         var month = dateStr.slice(0, 2);
         var day = dateStr.slice(2, 4);
-        
+
         date = new Date();
         date.setFullYear(year);
         date.setMonth(month - 1);
@@ -525,22 +525,22 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
         date.setHours(0);
         date.setMinutes(0);
         date.setSeconds(0);
-        
+
         return date.getDay() === 1;
     }
-    
+
     function checkFirstDay() {
         var value = $('#firstday input').val();
         var requiredObj = $('#firstday');
-        
-        if(value.length === 0) {
+
+        if (value.length === 0) {
             requiredObj.addClass('has-error');
             requiredObj.children('.help-block-error').text('开学第一天不能为空。');
             $('#dump').attr('disabled', 'disabled');
             return false;
         }
         else {
-            if(isMonday(value) === false) {
+            if (isMonday(value) === false) {
                 requiredObj.addClass('has-error');
                 requiredObj.children('.help-block-error').text('开学第一天应该为周一。');
                 $('#dump').attr('disabled', 'disabled');
@@ -555,53 +555,53 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
             }
         }
     }
-    
-    $('#firstday input').focusout(function() {
-        checkFirstDay();
-    });
-    
-    $('#firstday input').change(function() {
+
+    $('#firstday input').focusout(function () {
         checkFirstDay();
     });
 
-    $('#dump').click(function() {
-        if(checkFirstDay() === false) {
+    $('#firstday input').change(function () {
+        checkFirstDay();
+    });
+
+    $('#dump').click(function () {
+        if (checkFirstDay() === false) {
             return false;
         }
-        
+
         var table = new Array();    //记录课程连续的次数
-        for(var i = 0; i <= 14; ++i) {
+        for (var i = 0; i <= 14; ++i) {
             table[i] = new Array();
 
-            for(var j = 0; j <= 7; ++j) {
+            for (var j = 0; j <= 7; ++j) {
                 table[i][j] = 0;
             }
         }
-        
+
         var clases = new Array();
         var i = 0, index = 0;
-        $('.time-table > tbody > tr').each(function() {
+        $('.time-table > tbody > tr').each(function () {
             var j = 0;
-            $(this).children('td').each(function() {
+            $(this).children('td').each(function () {
 
                 var rowspan = $(this).attr('rowspan');
 
-                while(table[i][j] !== 0) {    //课程连续导致 td 个数不统一
+                while (table[i][j] !== 0) {    //课程连续导致 td 个数不统一
                     ++j;
                 }
 
-                if(i === 0 || j === 0) {  //星期和节数
+                if (i === 0 || j === 0) {  //星期和节数
                     table[i][j] = 0;
                 }
                 else {
                     var tdHtml = $(this).html();
 
-                    if(tdHtml !== "&nbsp;") {   //td标签内容不是空格
+                    if (tdHtml !== "&nbsp;") {   //td标签内容不是空格
                         var clas = parseClas(tdHtml, i, j);    //课表内容
                         clases[index] = clas;
                         ++index;
 
-                        for(var k = 0; k < rowspan; ++k) {
+                        for (var k = 0; k < rowspan; ++k) {
                             table[i + k][j] = rowspan;
                         }
                     }
@@ -617,17 +617,17 @@ END:VTIMEZONE\n", calendarEnd = "END:VCALENDAR";
         var firstDay = createDate(firstDayStr);
 
         calendar = createCalendar(clases, firstDay);
-        
+
         var filename = $("#username").text();
         filename = parseData(filename, "(", ")", 0);
-        if(filename === false) {
+        if (filename === false) {
             filename = "课表日程";
         }
         else {
             filename = filename.data;
         }
         filename += ".ics";
-        
+
         createDownloadFile(filename, calendar);
     });
 });
