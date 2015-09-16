@@ -1,12 +1,18 @@
 # 黑龙江大学课表日程助手
 
-官网：[http://whatclass.cn](http://whatclass.cn) (已下线)
+# 官网
+
+[http://whatclass.cn](http://whatclass.cn) (已下线)
+
+
+# 简介
 
 * 基于 [Yii 2.0](https://github.com/yiisoft/yii2) 框架
-* 对接教务处网站
+* 对接黑大教务处网站
 * 自动生成课表数据同步至手机
 
-# 安装
+
+## 安装
 
 * Clone代码
 
