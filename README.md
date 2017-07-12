@@ -2,7 +2,7 @@
 
 # 官网
 
-[http://whatclass.cn](http://whatclass.cn) (已下线)
+[http://whatclass.cn](http://whatclass.cn) 
 
 
 # 简介
