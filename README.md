@@ -1,4 +1,6 @@
-# 黑龙江大学课表日程助手
+# 黑龙江大学课表日程助手 (停止维护)
+
+欢迎学弟学妹接管这个项目，邮件我 (shenyu@shenyu.me)。
 
 # 官网
 
@@ -18,7 +20,7 @@
 
 	`git clone https://github.com/chrisniael/whatclass.cn.git`
 
-* 安装Composer
+* ~~安装Composer~~
 
 	`sudo curl -sS https://getcomposer.org/installer | sudo php -- --filename=composer --install-dir=/usr/local/bin`
 
@@ -26,9 +28,11 @@
 	* `--filename` 参数指定了安装后composer命令的名称，默认名称是 `composer.phar`
 	* `--install-dir` 参数指定了安装的路径
 
-* 安装yii依赖的组件
+* ~~安装yii依赖的组件~~
 
 	`composer update`
+
+  因为项目比较老，现在再用 composer 安装依赖会不兼容，目前已经将依赖 (vendor 目录) 都打包进 git 仓库，不需要再用 composer 安装。
 
 * 部署网站
 
