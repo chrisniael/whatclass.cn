@@ -35,6 +35,7 @@
 	将应用部署到 `Nginx` 或 `Apache` 的工作目录，可能需要安装一些其他组件，访问 `http://localhost/whatclass/requirements.php` 来检查服务器环境是否符合 Yii 2.0 的运行要求。
 
 	```bash
-	# Make assets dir writable by nginx/apache process.
+	# Make assets and runtime dir writable by nginx/apache process.
 	chmod -R 777 web/assets
+	chmod -R 777 runtime
 	```
